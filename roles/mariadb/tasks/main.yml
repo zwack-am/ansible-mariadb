@@ -1,3 +1,25 @@
 ---
 
-
+# Set up the repository
+- name: Install software-properties-common
+  package:
+    name: software-properties-common
+    state: installed
+    
+- name: Add MariaDB key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 0xcbcb082a1bb943db
+    state: present
+   
+- name: Add MariaDB Repository
+  apt_repository: 
+    repo: deb arch=amd64 http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.1/debian jessie main
+    update_cache: yes
+    state: present
+    
+# Install the server
+- name: Install MariaDB-Server
+  package:
+    name: mariadb-server
+    state: installed
