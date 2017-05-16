@@ -23,3 +23,9 @@
   package:
     name: mariadb-server
     state: installed
+# Install the client
+
+- name: Install MariaDB-Client
+  package:
+    name: mariadb-client
+    state: installed
