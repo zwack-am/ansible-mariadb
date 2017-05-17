@@ -30,3 +30,29 @@
   package:
     name: mariadb-client
     state: installed
+
+# Remove anonymous users
+- name: Remove anonymous users from the database
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+  ignore_errors: true
+
+# Remove remote root
+- name: Remove Remote access from root
+  mysql_user: 
+    name: 'root'
+    host: "{{ ansible_hostname }}"
+    state: absent
+  ignore_errors: true
+
+# Remove privileges on test database
+
+# Drop test database
+- name: Remove test database
+  mysql_db:
+    name: 'test'
+    state: 'absent'
+  ignore_errors: true
+
